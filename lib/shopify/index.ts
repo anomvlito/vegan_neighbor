@@ -21,7 +21,7 @@ export async function shopifyFetch<T>({
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'X-Shopify-Storefront-Access-Token': shopifyToken,
+        'X-Shopify-Storefront-Access-Token': shopifyToken!,
       },
       body: JSON.stringify({ query, variables }),
       next: tags ? { tags } : undefined,
