@@ -1,8 +1,18 @@
-import { defineConfig } from "eslint/config";
-import nextConfig from "eslint-config-next";
+import js from "@eslint/js";
 
-const eslintConfig = defineConfig(
-  nextConfig
-);
-
-export default eslintConfig;
+export default [
+  {
+    ignores: [".next/**", "out/**", "build/**", "next-env.d.ts"],
+  },
+  {
+    languageOptions: {
+      parserOptions: {
+        ecmaVersion: "latest",
+        sourceType: "module",
+      },
+    },
+    rules: {
+      ...js.configs.recommended.rules,
+    },
+  },
+];
