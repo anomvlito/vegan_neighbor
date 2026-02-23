@@ -1,0 +1,12 @@
+{
+  "framework": "nextjs",
+  "buildCommand": "npm run build",
+  "devCommand": "npm run dev",
+  "installCommand": "npm install",
+  "outputDirectory": ".next",
+  "env": {
+    "SHOPIFY_STORE_DOMAIN": "@shopify_store_domain",
+    "SHOPIFY_STOREFRONT_ACCESS_TOKEN": "@shopify_storefront_access_token",
+    "NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN": "@next_public_shopify_store_domain"
+  }
+}
