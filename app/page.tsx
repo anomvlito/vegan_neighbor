@@ -1,6 +1,7 @@
 import { Logo } from '@/components/ui/Logo'
 import { Button } from '@/components/ui/Button'
 import { H1, H2, Body, Subtitle } from '@/components/ui/Typography'
+import { ProductCard } from '@/components/product/ProductCard'
 import Link from 'next/link'
 
 export default function Home() {
