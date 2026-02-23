@@ -1,13 +1,17 @@
-import { ButtonHTMLAttributes, forwardRef } from 'react'
+'use client'
+
+import { ButtonHTMLAttributes, forwardRef, ReactNode, cloneElement } from 'react'
 import { cn } from '@/lib/utils/cn'
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'outline'
   size?: 'sm' | 'md' | 'lg'
+  asChild?: boolean
+  children?: ReactNode
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = 'primary', size = 'md', ...props }, ref) => {
+  ({ className, variant = 'primary', size = 'md', asChild = false, children, ...props }, ref) => {
     const baseStyles = 'font-display font-bold tracking-wider transition-all duration-300 inline-flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed'
 
     const variants = {
@@ -22,12 +26,23 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       lg: 'px-8 py-4 text-lg',
     }
 
+    const combinedClassName = cn(baseStyles, variants[variant], sizes[size], className)
+
+    if (asChild && children) {
+      return cloneElement(children as React.ReactElement, {
+        className: combinedClassName,
+        ...props,
+      } as any)
+    }
+
     return (
       <button
-        className={cn(baseStyles, variants[variant], sizes[size], className)}
+        className={combinedClassName}
         ref={ref}
         {...props}
-      />
+      >
+        {children}
+      </button>
     )
   }
 )

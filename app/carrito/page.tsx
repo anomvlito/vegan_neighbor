@@ -145,12 +145,6 @@ export default function CarritoPage() {
                 </div>
               </div>
 
-              {error && (
-                <div className="bg-red-100 border-2 border-red-400 text-red-700 p-3 font-mono text-sm">
-                  {error}
-                </div>
-              )}
-
               <Button
                 onClick={handleCheckout}
                 disabled={isCheckingOut || items.length === 0}
