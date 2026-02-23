@@ -1,59 +1,24 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
 import { H1, Body, H3 } from '@/components/ui/Typography'
 import { Button } from '@/components/ui/Button'
 import { useCart } from '@/lib/hooks/useCart'
-import { CREATE_CART_MUTATION, ADD_TO_CART_MUTATION } from '@/lib/shopify/mutations'
-import { shopifyFetch } from '@/lib/shopify'
-import { Cart } from '@/lib/shopify/types'
 
 export default function CarritoPage() {
-  const { items, removeItem, updateQuantity, clearCart, setCartId } = useCart()
+  const { items, removeItem, updateQuantity, clearCart } = useCart()
   const [isCheckingOut, setIsCheckingOut] = useState(false)
-  const [error, setError] = useState('')
 
   const subtotal = items.reduce((total, item) => total + item.price * item.quantity, 0)
-  const tax = subtotal * 0.1 // 10% tax (adjust as needed)
+  const tax = subtotal * 0.1
   const total = subtotal + tax
 
   const handleCheckout = async () => {
     setIsCheckingOut(true)
-    setError('')
-
-    try {
-      // Crear carrito en Shopify
-      const { data, errors } = await shopifyFetch<{ cartCreate: { cart: Cart } }>({
-        query: CREATE_CART_MUTATION,
-        variables: {
-          input: {
-            lines: items.map((item) => ({
-              merchandiseId: item.variantId,
-              quantity: item.quantity,
-            })),
-          },
-        },
-      })
-
-      if (errors) {
-        throw new Error('Error al crear el carrito')
-      }
-
-      const cartId = data?.cartCreate.cart.id
-      const checkoutUrl = data?.cartCreate.cart.checkoutUrl
-
-      if (cartId && checkoutUrl) {
-        setCartId(cartId)
-        // Redirect a Shopify checkout
-        window.location.href = checkoutUrl
-      }
-    } catch (err) {
-      console.error('Checkout error:', err)
-      setError('Error al procesar el checkout. Por favor intenta de nuevo.')
-    } finally {
-      setIsCheckingOut(false)
-    }
+    // TODO: Integrar con Shopify después
+    alert('Checkout será integrado con Shopify pronto')
+    setIsCheckingOut(false)
   }
 
   return (

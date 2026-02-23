@@ -1,11 +1,9 @@
 import { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { notFound } from 'next/navigation'
 import { H1, H3, Body, Tagline } from '@/components/ui/Typography'
 import { Button } from '@/components/ui/Button'
 import { AddToCartButton } from '@/components/cart/AddToCartButton'
-import { getProduct, getProductHandles } from '@/lib/shopify/products'
 
 interface ProductPageProps {
   params: {
@@ -13,39 +11,52 @@ interface ProductPageProps {
   }
 }
 
-export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
-  const product = await getProduct(params.handle)
+const mockProducts: any = {
+  'empanadas-veganas': {
+    id: '1', handle: 'empanadas-veganas', title: 'Empanadas Veganas',
+    description: 'Deliciosas empanadas rellenas de verduras frescas y proteína vegetal. Hechas con masa casera y relleno artesanal.',
+    priceRange: { minVariantPrice: { amount: '12.99', currencyCode: 'USD' }, maxVariantPrice: { amount: '12.99', currencyCode: 'USD' } },
+    images: { edges: [{ node: { url: '/assets/VN_logopack/PNG/TRANSPARENTE-AVATAR.png', altText: 'Empanadas' } }] },
+    variants: { edges: [{ node: { id: 'var1', title: 'Default', price: { amount: '12.99' }, availableForSale: true } }] }
+  },
+  'hamburguesa-plant-based': {
+    id: '2', handle: 'hamburguesa-plant-based', title: 'Hamburguesa Plant-Based',
+    description: 'Hamburguesa 100% vegana con sabor auténtico. Proteína vegetal sabrosa y nutritiva.',
+    priceRange: { minVariantPrice: { amount: '14.99', currencyCode: 'USD' }, maxVariantPrice: { amount: '14.99', currencyCode: 'USD' } },
+    images: { edges: [{ node: { url: '/assets/VN_logopack/PNG/TRANSPARENTE-AVATAR.png', altText: 'Hamburguesa' } }] },
+    variants: { edges: [{ node: { id: 'var2', title: 'Default', price: { amount: '14.99' }, availableForSale: true } }] }
+  },
+  'pizza-vegana': {
+    id: '3', handle: 'pizza-vegana', title: 'Pizza Vegana',
+    description: 'Pizza artesanal con ingredientes 100% veganos. Masa casera y toppings frescos.',
+    priceRange: { minVariantPrice: { amount: '16.99', currencyCode: 'USD' }, maxVariantPrice: { amount: '16.99', currencyCode: 'USD' } },
+    images: { edges: [{ node: { url: '/assets/VN_logopack/PNG/TRANSPARENTE-AVATAR.png', altText: 'Pizza' } }] },
+    variants: { edges: [{ node: { id: 'var3', title: 'Default', price: { amount: '16.99' }, availableForSale: true } }] }
+  },
+}
+
+export function generateMetadata({ params }: ProductPageProps): Metadata {
+  const product = mockProducts[params.handle]
 
   if (!product) {
-    return {
-      title: 'Producto no encontrado',
-    }
+    return { title: 'Producto no encontrado' }
   }
-
-  const image = product.images.edges[0]?.node
-  const price = product.priceRange.minVariantPrice.amount
 
   return {
     title: `${product.title} - Vegan Neighbor`,
     description: product.description,
-    openGraph: {
-      title: product.title,
-      description: product.description,
-      images: image ? [{ url: image.url }] : [],
-    },
   }
 }
 
-export async function generateStaticParams() {
-  const handles = await getProductHandles()
-  return handles.map((handle) => ({ handle }))
+export function generateStaticParams() {
+  return Object.keys(mockProducts).map((handle) => ({ handle }))
 }
 
-export default async function ProductPage({ params }: ProductPageProps) {
-  const product = await getProduct(params.handle)
+export default function ProductPage({ params }: ProductPageProps) {
+  const product = mockProducts[params.handle]
 
   if (!product) {
-    notFound()
+    return <div className="text-center py-20">Producto no encontrado</div>
   }
 
   const images = product.images.edges.map((edge) => edge.node)

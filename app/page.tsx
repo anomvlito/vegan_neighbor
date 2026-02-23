@@ -1,12 +1,59 @@
 import { Logo } from '@/components/ui/Logo'
 import { Button } from '@/components/ui/Button'
 import { H1, H2, Body, Subtitle } from '@/components/ui/Typography'
-import { ProductCard } from '@/components/product/ProductCard'
-import { getProducts } from '@/lib/shopify/products'
 import Link from 'next/link'
 
-export default async function Home() {
-  const products = await getProducts(6)
+export default function Home() {
+  const products = [
+    {
+      id: '1',
+      handle: 'empanadas-veganas',
+      title: 'Empanadas Veganas',
+      description: 'Deliciosas empanadas rellenas de verduras frescas',
+      priceRange: { minVariantPrice: { amount: '12.99', currencyCode: 'USD' }, maxVariantPrice: { amount: '12.99', currencyCode: 'USD' } },
+      images: { edges: [{ node: { url: '/assets/VN_logopack/PNG/TRANSPARENTE-AVATAR.png', altText: 'Empanadas' } }] },
+    },
+    {
+      id: '2',
+      handle: 'hamburguesa-plant-based',
+      title: 'Hamburguesa Plant-Based',
+      description: 'Hamburguesa 100% vegana con sabor auténtico',
+      priceRange: { minVariantPrice: { amount: '14.99', currencyCode: 'USD' }, maxVariantPrice: { amount: '14.99', currencyCode: 'USD' } },
+      images: { edges: [{ node: { url: '/assets/VN_logopack/PNG/TRANSPARENTE-AVATAR.png', altText: 'Hamburguesa' } }] },
+    },
+    {
+      id: '3',
+      handle: 'pizza-vegana',
+      title: 'Pizza Vegana',
+      description: 'Pizza artesanal con ingredientes 100% veganos',
+      priceRange: { minVariantPrice: { amount: '16.99', currencyCode: 'USD' }, maxVariantPrice: { amount: '16.99', currencyCode: 'USD' } },
+      images: { edges: [{ node: { url: '/assets/VN_logopack/PNG/TRANSPARENTE-AVATAR.png', altText: 'Pizza' } }] },
+    },
+    {
+      id: '4',
+      handle: 'tacos-veganos',
+      title: 'Tacos Veganos',
+      description: 'Tacos deliciosos con proteína vegetal',
+      priceRange: { minVariantPrice: { amount: '11.99', currencyCode: 'USD' }, maxVariantPrice: { amount: '11.99', currencyCode: 'USD' } },
+      images: { edges: [{ node: { url: '/assets/VN_logopack/PNG/TRANSPARENTE-AVATAR.png', altText: 'Tacos' } }] },
+    },
+    {
+      id: '5',
+      handle: 'ensalada-fresca',
+      title: 'Ensalada Fresca',
+      description: 'Ensalada de verduras frescas y organicas',
+      priceRange: { minVariantPrice: { amount: '9.99', currencyCode: 'USD' }, maxVariantPrice: { amount: '9.99', currencyCode: 'USD' } },
+      images: { edges: [{ node: { url: '/assets/VN_logopack/PNG/TRANSPARENTE-AVATAR.png', altText: 'Ensalada' } }] },
+    },
+    {
+      id: '6',
+      handle: 'smoothie-verde',
+      title: 'Smoothie Verde',
+      description: 'Bebida nutritiva con frutas y verduras',
+      priceRange: { minVariantPrice: { amount: '7.99', currencyCode: 'USD' }, maxVariantPrice: { amount: '7.99', currencyCode: 'USD' } },
+      images: { edges: [{ node: { url: '/assets/VN_logopack/PNG/TRANSPARENTE-AVATAR.png', altText: 'Smoothie' } }] },
+    },
+  ]
 
   return (
     <div>
