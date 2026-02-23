@@ -1,14 +1,15 @@
 import { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
+import { notFound } from 'next/navigation'
 import { H1, H3, Body, Tagline } from '@/components/ui/Typography'
 import { Button } from '@/components/ui/Button'
 import { AddToCartButton } from '@/components/cart/AddToCartButton'
 
 interface ProductPageProps {
-  params: {
+  params: Promise<{
     handle: string
-  }
+  }>
 }
 
 const mockProducts: any = {
@@ -35,8 +36,9 @@ const mockProducts: any = {
   },
 }
 
-export function generateMetadata({ params }: ProductPageProps): Metadata {
-  const product = mockProducts[params.handle]
+export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
+  const { handle } = await params
+  const product = mockProducts[handle]
 
   if (!product) {
     return { title: 'Producto no encontrado' }
@@ -52,14 +54,15 @@ export function generateStaticParams() {
   return Object.keys(mockProducts).map((handle) => ({ handle }))
 }
 
-export default function ProductPage({ params }: ProductPageProps) {
-  const product = mockProducts[params.handle]
+export default async function ProductPage({ params }: ProductPageProps) {
+  const { handle } = await params
+  const product = mockProducts[handle]
 
   if (!product) {
     return <div className="text-center py-20">Producto no encontrado</div>
   }
 
-  const images = product.images.edges.map((edge) => edge.node)
+  const images = product.images.edges.map((edge: any) => edge.node)
   const variant = product.variants.edges[0]?.node
   const price = product.priceRange.minVariantPrice.amount
   const currency = product.priceRange.minVariantPrice.currencyCode
@@ -86,7 +89,7 @@ export default function ProductPage({ params }: ProductPageProps) {
           <div className="space-y-4">
             {images.length > 0 ? (
               <div className="space-y-4">
-                {images.map((image, idx) => (
+                {images.map((image: any, idx: number) => (
                   <div
                     key={idx}
                     className="relative aspect-square bg-vn-natural border-2 border-vn-black overflow-hidden"
