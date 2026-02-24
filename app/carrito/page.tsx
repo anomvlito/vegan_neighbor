@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { H1, Body, H3 } from '@/components/ui/Typography'
 import { Button } from '@/components/ui/Button'
 import { useCart } from '@/lib/hooks/useCart'
@@ -22,8 +23,20 @@ export default function CarritoPage() {
   }
 
   return (
-    <main className="py-12 md:py-20">
-      <div className="max-w-4xl mx-auto px-4">
+    <main>
+      {/* Banner */}
+      <div className="relative w-full h-48 md:h-64 overflow-hidden bg-vn-black">
+        <Image
+          src="/images/02util.jpg"
+          alt="Acá va algo vegan y rico"
+          fill
+          className="object-cover object-center"
+          priority
+        />
+        <div className="absolute inset-0 bg-black/20" />
+      </div>
+
+      <div className="max-w-4xl mx-auto px-4 py-12 md:py-20">
         {/* Header */}
         <H1 className="mb-2">Tu Carrito</H1>
         <p className="font-mono text-sm text-vn-black/60 mb-8">

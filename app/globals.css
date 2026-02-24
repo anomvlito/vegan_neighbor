@@ -51,3 +51,14 @@ a:hover {
   background: #000000;
   color: #ffffff;
 }
+
+/* Animation delay utilities */
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+
+.animate-on-load {
+  opacity: 0;
+}

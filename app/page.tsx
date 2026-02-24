@@ -1,7 +1,7 @@
-import { Logo } from '@/components/ui/Logo'
 import { Button } from '@/components/ui/Button'
 import { H1, H2, Body, Subtitle } from '@/components/ui/Typography'
 import { ProductCard } from '@/components/product/ProductCard'
+import Image from 'next/image'
 import Link from 'next/link'
 
 export default function Home() {
@@ -97,9 +97,18 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Right Logo */}
+            {/* Right - Hero Image */}
             <div className="hidden md:flex items-center justify-center">
-              <Logo variant="DOSLINEAS" version="POSITIVO" size="xl" />
+              <div className="relative w-full max-w-lg overflow-hidden border-2 border-white/20">
+                <Image
+                  src="/images/palillo.jpg"
+                  alt="Vegan Neighbor - rico, casero, vegan"
+                  width={600}
+                  height={480}
+                  className="w-full h-auto object-cover animate-scale-in"
+                  priority
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -137,36 +146,100 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Lifestyle Section */}
+      <section className="bg-vn-black text-vn-white py-20 md:py-32 border-y-4 border-vn-white/10">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-12">
+            <Subtitle className="text-vn-white/70">
+              más que comida
+            </Subtitle>
+            <H2 className="text-vn-white mt-2">Estilo Vegan</H2>
+            <Body className="text-vn-white/60 max-w-xl mx-auto mt-4">
+              Llevamos nuestra convicción con orgullo. Cada producto, cada prenda,
+              cada detalle refleja quiénes somos.
+            </Body>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Polera */}
+            <div className="group relative overflow-hidden">
+              <Image
+                src="/images/polera.jpg"
+                alt="Polera Vegan Neighbor"
+                width={600}
+                height={480}
+                className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+              <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent">
+                <p className="font-display text-xl tracking-wider uppercase">Polera VN</p>
+                <p className="font-mono text-xs text-white/70 tracking-wider">Próximamente</p>
+              </div>
+            </div>
+
+            {/* Tote */}
+            <div className="group relative overflow-hidden">
+              <Image
+                src="/images/tote.jpg"
+                alt="Tote bag Vegan Neighbor - rico, casero, vegan"
+                width={600}
+                height={720}
+                className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+              <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent">
+                <p className="font-display text-xl tracking-wider uppercase">Tote Bag VN</p>
+                <p className="font-mono text-xs text-white/70 tracking-wider">Próximamente</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Values Section */}
       <section className="bg-vn-natural py-20 md:py-32 border-y-4 border-vn-black">
         <div className="max-w-7xl mx-auto px-4">
-          <H2 className="mb-12 text-center">Nuestra filosofía</H2>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 items-center">
+            {/* Image */}
+            <div className="hidden md:block">
+              <Image
+                src="/images/03util.jpg"
+                alt="Señalética Vegan Neighbor - rico, casero, vegan"
+                width={400}
+                height={500}
+                className="w-full h-auto object-cover border-2 border-vn-black"
+              />
+            </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                title: 'Rico',
-                description:
-                  'Cada producto está diseñado para deleitar tu paladar. Sabor auténtico, sin compromisos.',
-              },
-              {
-                title: 'Casero',
-                description:
-                  'Hecho con dedicación y cuidado, como si lo preparáramos en nuestra propia cocina.',
-              },
-              {
-                title: 'Vegan',
-                description:
-                  'Cero explotación animal. Puro respeto por todos los seres vivos que comparten nuestro planeta.',
-              },
-            ].map((value, idx) => (
-              <div key={idx} className="space-y-4">
-                <h3 className="font-display text-2xl font-bold tracking-wider uppercase">
-                  {value.title}
-                </h3>
-                <Body className="text-vn-black/70">{value.description}</Body>
+            {/* Content */}
+            <div className="md:col-span-3">
+              <H2 className="mb-12">Nuestra filosofía</H2>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {[
+                  {
+                    title: 'Rico',
+                    description:
+                      'Cada producto está diseñado para deleitar tu paladar. Sabor auténtico, sin compromisos.',
+                  },
+                  {
+                    title: 'Casero',
+                    description:
+                      'Hecho con dedicación y cuidado, como si lo preparáramos en nuestra propia cocina.',
+                  },
+                  {
+                    title: 'Vegan',
+                    description:
+                      'Cero explotación animal. Puro respeto por todos los seres vivos que comparten nuestro planeta.',
+                  },
+                ].map((value, idx) => (
+                  <div key={idx} className="space-y-4">
+                    <h3 className="font-display text-2xl font-bold tracking-wider uppercase">
+                      {value.title}
+                    </h3>
+                    <Body className="text-vn-black/70">{value.description}</Body>
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
           </div>
         </div>
       </section>

@@ -45,6 +45,25 @@ const config: Config = {
         wider: '0.05em',
         widest: '0.1em',
       },
+      keyframes: {
+        'splash-exit': {
+          '0%': { transform: 'translateY(0)', opacity: '1' },
+          '100%': { transform: 'translateY(-100%)', opacity: '0' },
+        },
+        'fade-in-up': {
+          '0%': { transform: 'translateY(30px)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
+        'scale-in': {
+          '0%': { transform: 'scale(1.1)', opacity: '0' },
+          '100%': { transform: 'scale(1)', opacity: '1' },
+        },
+      },
+      animation: {
+        'splash-exit': 'splash-exit 0.8s cubic-bezier(0.76, 0, 0.24, 1) forwards',
+        'fade-in-up': 'fade-in-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards',
+        'scale-in': 'scale-in 1s cubic-bezier(0.22, 1, 0.36, 1) forwards',
+      },
     },
   },
   plugins: [],
