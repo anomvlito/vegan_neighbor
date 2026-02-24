@@ -1,3 +1,4 @@
+// v2 - cache bust
 import type { Config } from 'tailwindcss'
 
 const config: Config = {
@@ -30,13 +31,13 @@ const config: Config = {
         '6xl': ['60px', '60px'],
       },
       spacing: {
-        xs: '4px',
-        sm: '8px',
-        md: '16px',
-        lg: '24px',
-        xl: '32px',
-        '2xl': '48px',
-        '3xl': '64px',
+        'vn-xs': '4px',
+        'vn-sm': '8px',
+        'vn-md': '16px',
+        'vn-lg': '24px',
+        'vn-xl': '32px',
+        'vn-2xl': '48px',
+        'vn-3xl': '64px',
       },
       letterSpacing: {
         tight: '-0.02em',
